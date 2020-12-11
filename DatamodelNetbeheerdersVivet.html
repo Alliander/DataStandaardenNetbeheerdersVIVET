@@ -4,25 +4,16 @@
   <meta charset="utf-8">
   <title>Datamodellen energienetten voor Verbetering Informatie Voorziening Energie Transitie</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
-  <script class="remove">
-   // All config options at https://respec.org/docs/ 
-   var respecConfig = {
-      specStatus: "ED",
-      editors: [
-        { name: "Jan Bruinenberg", url: "https://www.alliander.com" },
-		{ name: "Sefanja Severin", url: "https://www.stedin.net" },
-		{ name: "George Argyropoulos", url: "https://www.stedin.net" },
-		{ name: "Ivo Kuijlaars", url: "https://www.enexis.nl" },
-		{ name: "Frank Boere", url: "https://www.enduris.nl" },
-		{ name: "Richard Flierman", url: "https://www.tennet.eu" },
-		{ name: "Joep van Genuchten", url: "https://www.alliander.com" },
-      ],
-      github: "https://github.com/Alliander/DataStandaardenNetbeheerdersVIVET",
-      // shortName: "VIVET",
-      // xref: "web-platform",
-      // group: "Wekgroep Datastandaarden NBNL",
-    };
-  </script>
+  <script>
+function includeHTML() {
+var ajax = new XMLHttpRequest();
+ajax.open("GET", "introductie.html", false);
+ajax.send();
+document.body.innerHTML += ajax.responseText;
+
+
+};
+
 </head>
 <body>
   <section id="abstract">
@@ -34,14 +25,32 @@
   <section id="sotd">
     <p>This is required.</p>
   </section>
-  <section data-dfn-for="Foo">
-    <h2>Introductie</h2>
-    
-    <p></p>
-    <p>
 
-    </p>
+
+    <section >
+    <h2>Gerelateerde projecten</h2>
+    <h3>GOPAX</h3>
+	<p> iets over gopax </p>
+	<h3>GLDPM</h3>
+    <p> iets over GLDPM </p>
+
   </section>
+  
+  
+    </section>
+  
+    <section >
+    <h2>Relevante Informatie standaarden</h2>
+    <h3>GOPAX</h3>
+	<p> iets over gopax </p>
+	<h3>GLDPM</h3>
+    <p> iets over GLDPM </p>
 
+  </section>
+  
+  
+  
+
+  
 </body>
 </html>

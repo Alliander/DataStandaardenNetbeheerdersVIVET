@@ -1,0 +1,95 @@
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cim: <http://iec.ch/TC57/2013/CIM-schema-cim16#>  .
+@prefix bs: <https://w3id.org/def/basicsemantics-owl#>
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix gce: <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit# > .
+
+gce:SubstationShape 
+	a NodeShapesh:Shape ;
+	rdfs:comment "shape describing the Substation object in the context of the planned capacity usecase" ;
+	targetClass cim:Substation ; 
+	sh:property [ 
+		rdfs:comment "mRID is compulsory"
+		sh:path cim:IdentifiedObject.mRID ; 
+		sh:datatype xsd:string ; 
+		sh:name "mRID" ;
+		sh:minCount 1; 
+		sh:maxCount 1; 
+	];
+	sh:property [
+		rdfs:comment "optionally give human readable name of the substation"
+		sh:path cim:IdentifiedObject.name ;
+		sh:datatype xsd:string ;
+	];
+	sh:property[
+		rdfs:comment "location of the substation (typically point geometry). This is NOT the computed feeding area of the substation."; 
+		sh:path geo:hasGeometry ;
+		sh:node gce:GeometryShape ;
+	];
+	sh:property [
+		sh:path gce:EquipmentContainer.OperationalLimitSet ;
+		sh:node gce:OperationalLimitSetShape ;
+	];
+	sh:property [
+		rdfs:comment "because the feeding area is a computed shape (voronoi) around the substation, we choose the make use of the cim:StringMeasurement class" ;
+		sh:path gce:Substation.Voedingsgebied ;
+		sh:node gce:StringMeasurementShape ;
+	]
+	.
+		
+
+gce:GeometryShape
+	a NodeShape ;
+	sh:targetClass geo:Geometry ;
+	rdfs:comment "the only constraint is that it has to be a geosparql geometry" .
+	
+gce:OperationalLimitSetShape
+	a sh:NodeShape ; 
+	sh:targetClass cim:OperationalLimitSet ;
+	sh:property [ 
+		rdfs:comment "mRID is compulsory"
+		sh:path cim:IdentifiedObject.mRID ; 
+		sh:datatype xsd:string ; 
+		sh:name "mRID" ;
+		sh:minCount 1; 
+		sh:maxCount 1; 	
+	];
+	sh:property [
+		sh:path cim:OperationalLimitValue;
+		sh:node gce:ActivePowerLimitShape	;
+	].
+	
+gce:ActivePowerLimitShape
+	a sh:NodeShape ;
+	sh:targetClass cim:ActivePowerLimit ;
+	sh:property [
+		sh:path cim:ActivePowerLimit.value ;
+		sh:node gce:ActivePowerShape ;
+	].
+
+gce:ActivePowerShape
+	a sh:NodeShape ;
+	property [
+		sh:path cim:ActivePower.multiplier ;
+		sh:in ("k" "M");
+	];
+	sh:property [
+		sh:path cim:ActivePower.unit
+		sh:in ("W")
+	];
+	sh:property [
+		sh:path cim:ActivePower.value ;
+		sh:datatype xsd:float ;
+	].
+
+gce:StringMeasurementShape
+	a sh:sha
+
+			
+		
+		
