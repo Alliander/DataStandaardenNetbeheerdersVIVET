@@ -10,7 +10,7 @@
 @prefix gce: <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit# > .
 
 gce:SubstationShape 
-	a NodeShapesh:Shape ;
+	a sh:NodeShape ;
 	rdfs:comment "shape describing the Substation object in the context of the planned capacity usecase" ;
 	targetClass cim:Substation ; 
 	sh:property [ 
@@ -44,7 +44,7 @@ gce:SubstationShape
 		
 
 gce:GeometryShape
-	a NodeShape ;
+	a sh:NodeShape ;
 	sh:targetClass geo:Geometry ;
 	rdfs:comment "the only constraint is that it has to be a geosparql geometry" .
 	
@@ -74,6 +74,7 @@ gce:ActivePowerLimitShape
 
 gce:ActivePowerShape
 	a sh:NodeShape ;
+	sh:targetClass cim:ActivePower
 	property [
 		sh:path cim:ActivePower.multiplier ;
 		sh:in ("k" "M");
@@ -88,8 +89,20 @@ gce:ActivePowerShape
 	].
 
 gce:StringMeasurementShape
-	a sh:sha
-
+	a sh:NodeShape ; 
+	sh:targetClass cim:StringMeasurement;
+	property [
+		sh:path cim:Measurement.measurementType ;
+		sh:in ("Voronoi around Substation");
+	];
+	sh:property [
+		sh:path cim:StringMeasurement.StringMeasurementValues ;
+		sh:node gce:StringMeasurementValueShape ;
+	].
+	
+gce:StringMeasurementValueShape
+	a sh:NodeShape ; 
+	
 			
 		
 		
