@@ -3,13 +3,13 @@ var respecConfig = {
   specType: "ST",
   //publishDate: "2020-03-23",
   editors: [
-        { name: "Jan Bruinenberg", company: "Alliander", url: "https://www.alliander.com" },
-		{ name: "Ivo Kuijlaars",company: "Enexis", url: "https://www.enexis.nl" },
-		{ name: "Sefanja Severin",company: "Stedin", url: "https://www.stedin.net" },
-		{ name: "Frank Boere",company: "Enduris", url: "https://www.enduris.nl" },
-		{ name: "Richard Flierman",company: "TenneT", url: "https://www.tennet.eu" },
-		{ name: "George Argyropoulos", company: "Stedin", url: "https://www.stedin.net" },
-		{ name: "Joep van Genuchten", company: "Alliander", url: "https://www.alliander.com" },
+        { name: "Jan Bruinenberg", company: "Alliander", companyURL: "https://www.alliander.com" },
+		{ name: "Ivo Kuijlaars",company: "Enexis", companyURL: "https://www.enexis.nl" },
+		{ name: "Sefanja Severin",company: "Stedin", companyURL: "https://www.stedin.net" },
+		{ name: "Frank Boere",company: "Enduris", companyURL: "https://www.enduris.nl" },
+		{ name: "Richard Flierman",company: "TenneT", companyURL: "https://www.tennet.eu" },
+		{ name: "George Argyropoulos", company: "Stedin", companyURL: "https://www.stedin.net" },
+		{ name: "Joep van Genuchten", company: "Alliander", companyURL: "https://www.alliander.com" },
       ],
 
   github: "https://github.com/Alliander/DataStandaardenNetbeheerdersVIVET",
@@ -35,7 +35,19 @@ var respecConfig = {
   //  },
   //},
   localBiblio: {
-
+	  "Station": {
+      "href": "https://alliander.poolparty.biz/AssetManagement/29",
+      "title": "Station",
+      "publisher": "Alliander",
+    },
+	"minbesluit": {
+      "href": "https://zoek.officielebekendmakingen.nl/stb-2020-511.html",
+      "title": "Besluit van 1 december 2020 tot wijziging van het Besluit investeringsplan en kwaliteit elektriciteit en gas (uitvalsituaties hoogspanningsnet)",
+      "authors": [""],
+      "date": "14-12-2020",
+      "publisher": "Ministerie van Economische Zaken en Klimaat",
+    },
+	
   }
   
 };
