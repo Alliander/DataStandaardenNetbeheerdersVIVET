@@ -1,0 +1,217 @@
+@prefix : <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#> .
+
+<https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/dc/terms/valid
+<http://purl.org/dc/terms/valid> rdf:type owl:ObjectProperty ;
+                                 rdfs:domain <http://www.iec.ch/TC57/CIM#OperationalLimitSet> ;
+                                 rdfs:range <http://www.iec.ch/TC57/CIM#DateTimeInterval> .
+
+
+###  http://www.iec.ch/TC57/CIM#ActivePowerLimit.value
+<http://www.iec.ch/TC57/CIM#ActivePowerLimit.value> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://www.iec.ch/TC57/CIM#ActivePowerLimit> ;
+                                                    rdfs:range <http://www.iec.ch/TC57/CIM#ActivePower> ;
+                                                    rdfs:comment "Value of active power limit. The attribute shall be a positive value or zero."@nl .
+
+
+###  http://www.iec.ch/TC57/CIM#Analog.AnalogValues
+<http://www.iec.ch/TC57/CIM#Analog.AnalogValues> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://www.iec.ch/TC57/CIM#Analog> ;
+                                                 rdfs:range <http://www.iec.ch/TC57/CIM#AnalogValue> ;
+                                                 rdfs:comment "The values connected to this measurement."@nl .
+
+
+###  http://www.iec.ch/TC57/CIM#Equipment.OperationalLimitSet
+<http://www.iec.ch/TC57/CIM#Equipment.OperationalLimitSet> rdf:type owl:ObjectProperty ;
+                                                           rdfs:domain <http://www.iec.ch/TC57/CIM#Substation> ;
+                                                           rdfs:range <http://www.iec.ch/TC57/CIM#OperationalLimitSet> ;
+                                                           rdfs:comment "The operational limit sets associated with this equipment."@en .
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+<http://xmlns.com/foaf/0.1/homepage> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://www.iec.ch/TC57/CIM#ServiceSupplier> .
+
+
+###  https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#BeschikbareCapaciteit
+:BeschikbareCapaciteit rdf:type owl:ObjectProperty ;
+                       rdfs:domain <http://www.iec.ch/TC57/CIM#Substation> ;
+                       rdfs:range <http://www.iec.ch/TC57/CIM#Analog> ;
+                       rdfs:comment "De beschikbare capaciteit op een station, geeft een indicatie van 'de capaciteit die er nog bij kan'. Exacte definitie hang af van hoe de netbeheerder dit beleidsmatig definieerd."@nl .
+
+
+###  https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#BeschikbareCapaciteitOpwek
+:BeschikbareCapaciteitOpwek rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :BeschikbareCapaciteit ;
+                            rdfs:domain <http://www.iec.ch/TC57/CIM#Substation> ;
+                            rdfs:range <http://www.iec.ch/TC57/CIM#Analog> ;
+                            rdfs:comment "De beschikbare capaciteit op een station, geeft een indicatie van 'de opwek capaciteit die er nog bij kan'. Exacte definitie hang af van hoe de netbeheerder dit beleidsmatig definieerd."@nl .
+
+
+###  https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#BeschikbareCapaciteitVoeding
+:BeschikbareCapaciteitVoeding rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf :BeschikbareCapaciteit ;
+                              rdfs:comment "De beschikbare capaciteit op een station, geeft een indicatie van 'de capaciteit die er nog bij kan' in de vorm van geleverde energie. Exacte definitie hang af van hoe de netbeheerder dit beleidsmatig definieerd."@en .
+
+
+###  https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#VanNetbeheerder
+:VanNetbeheerder rdf:type owl:ObjectProperty ;
+                 rdfs:domain <http://www.iec.ch/TC57/CIM#Substation> ;
+                 rdfs:range <http://www.iec.ch/TC57/CIM#ServiceSupplier> ;
+                 rdfs:comment "Relates the Power System Resource to the utility that operates it."@en .
+
+
+###  https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#Voedingsgebied
+:Voedingsgebied rdf:type owl:ObjectProperty ;
+                rdfs:domain <http://www.iec.ch/TC57/CIM#Substation> ;
+                rdfs:range <http://www.iec.ch/TC57/CIM#ServiceSupplier> ,
+                           <http://www.iec.ch/TC57/CIM#StringMeasurement> ;
+                rdfs:comment "Computed voronoi of the area that is served by a Substation"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.iec.ch/TC57/CIM#AnalogValue.value
+<http://www.iec.ch/TC57/CIM#AnalogValue.value> rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain <http://www.iec.ch/TC57/CIM#AnalogValue> ;
+                                               rdfs:range xsd:double .
+
+
+###  http://www.iec.ch/TC57/CIM#DateInterval.end
+<http://www.iec.ch/TC57/CIM#DateInterval.end> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <http://www.iec.ch/TC57/CIM#DateTimeInterval> ;
+                                              rdfs:range xsd:dateTime .
+
+
+###  http://www.iec.ch/TC57/CIM#DateInterval.start
+<http://www.iec.ch/TC57/CIM#DateInterval.start> rdf:type owl:DatatypeProperty ;
+                                                rdfs:domain <http://www.iec.ch/TC57/CIM#DateTimeInterval> ;
+                                                rdfs:range xsd:dateTime .
+
+
+###  http://www.iec.ch/TC57/CIM#IdentifiedObject.description
+<http://www.iec.ch/TC57/CIM#IdentifiedObject.description> rdf:type owl:DatatypeProperty ;
+                                                          rdfs:domain <http://www.iec.ch/TC57/CIM#Analog> ,
+                                                                      <http://www.iec.ch/TC57/CIM#OperationalLimitSet> ,
+                                                                      <http://www.iec.ch/TC57/CIM#ServiceSupplier> ,
+                                                                      <http://www.iec.ch/TC57/CIM#StringMeasurement> ,
+                                                                      <http://www.iec.ch/TC57/CIM#Substation> ;
+                                                          rdfs:range xsd:string ;
+                                                          rdfs:comment "The description is a free human readable text describing or naming the object. It may be non unique and may not correlate to a naming hierarchy."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#IdentifiedObject.mRID
+<http://www.iec.ch/TC57/CIM#IdentifiedObject.mRID> rdf:type owl:DatatypeProperty ;
+                                                   rdfs:domain <http://www.iec.ch/TC57/CIM#ServiceSupplier> ,
+                                                               <http://www.iec.ch/TC57/CIM#Substation> ;
+                                                   rdfs:range xsd:string ;
+                                                   rdfs:comment "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID as specified in RFC 4122 for the mRID. The use of UUID is strongly recommended.For CIMXML data files in RDF syntax conforming to IEC 61970552 the mRID is mapped to rdfID or rdfabout attributes that identify CIM object elements."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.iec.ch/TC57/CIM#ActivePower
+<http://www.iec.ch/TC57/CIM#ActivePower> rdf:type owl:Class ;
+                                         rdfs:comment "Product of RMS value of the voltage and the RMS value of the inphase component of the current."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#ActivePowerLimit
+<http://www.iec.ch/TC57/CIM#ActivePowerLimit> rdf:type owl:Class ;
+                                              rdfs:comment "Limit on active power flow."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#Analog
+<http://www.iec.ch/TC57/CIM#Analog> rdf:type owl:Class ;
+                                    rdfs:comment "Analog represents an analog Measurement."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#AnalogValue
+<http://www.iec.ch/TC57/CIM#AnalogValue> rdf:type owl:Class ;
+                                         rdfs:comment "AnalogValue represents an analog MeasurementValue."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#DateTimeInterval
+<http://www.iec.ch/TC57/CIM#DateTimeInterval> rdf:type owl:Class ;
+                                              rdfs:comment "Interval between two date and time points where the interval includes the start time but excludes end time."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#OperationalLimit
+<http://www.iec.ch/TC57/CIM#OperationalLimit> rdf:type owl:Class ;
+                                              rdfs:comment "A set of limits associated with equipment. Sets of limits might apply to a specific temperature or season for example. A set of limits may contain different severities of limit levels that would apply to the same equipment. The set may contain limits of different types such as apparent power and current limits or high and low voltage limits that are logically applied together as a set."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#OperationalLimitSet
+<http://www.iec.ch/TC57/CIM#OperationalLimitSet> rdf:type owl:Class ;
+                                                 rdfs:comment "A set of limits associated with equipment. Sets of limits might apply to a specific temperature or season for example. A set of limits may contain different severities of limit levels that would apply to the same equipment. The set may contain limits of different types such as apparent power and current limits or high and low voltage limits that are logically applied together as a set."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#ServiceSupplier
+<http://www.iec.ch/TC57/CIM#ServiceSupplier> rdf:type owl:Class ;
+                                             rdfs:comment "Organisation that provides services to customers."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#StringMeasurement
+<http://www.iec.ch/TC57/CIM#StringMeasurement> rdf:type owl:Class ;
+                                               rdfs:comment "StringMeasurement represents a measurement with values of type string."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#StringMeasurementValue
+<http://www.iec.ch/TC57/CIM#StringMeasurementValue> rdf:type owl:Class ;
+                                                    rdfs:comment "StringMeasurementValue represents a measurement value of type string."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#Substation
+<http://www.iec.ch/TC57/CIM#Substation> rdf:type owl:Class ;
+                                        rdfs:comment "A collection of equipment for purposes other than generation or utilization through which electric energy in bulk is passed for the purposes of switching or modifying its characteristics."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#UnitMultiplier
+<http://www.iec.ch/TC57/CIM#UnitMultiplier> rdf:type owl:Class ;
+                                            rdfs:comment "The unit multipliers defined for the CIM. When applied to unit symbols the unit symbol is treated as a derived unit. Regardless of the contents of the unit symbol text the unit symbol shall be treated as if it were a singlecharacter unit symbol. Unit symbols should not contain multipliers and it should be left to the multiplier to define the multiple for an entire data type. For example if a unit symbol is m2Pers and the multiplier is k then the value is km2s and the multiplier applies to the entire final value not to any individual part of the value. This can be conceptualized by substituting a derived unit symbol for the unit type. If one imagines that the symbol represents the derived unit m2Pers then applying the multiplier k can be conceptualized simply as k.For example the SI unit for mass is kg and not g. If the unit symbol is defined as kg then the multiplier is applied to kg as a whole and does not replace the k in front of the g. In this case the multiplier of m would be used with the unit symbol of kg to represent one gram. As a text string this violates the instructions in IEC 800001. However because the unit symbol in CIM is treated as a derived unit instead of as an SI unit it makes more sense to conceptualize the kg as if it were replaced by one of the proposed replacements for the SI mass symbol. If one imagines that the kg were replaced by a symbol then it is easier to conceptualize the multiplier m as creating the proper unit m and not the forbidden unit mkg."@en .
+
+
+###  http://www.iec.ch/TC57/CIM#UnitSymbol
+<http://www.iec.ch/TC57/CIM#UnitSymbol> rdf:type owl:Class ;
+                                        rdfs:comment "The derived units defined for usage in the CIM. In some cases the derived unit is equal to an SI unit. Whenever possible the standard derived symbol is used instead of the formula for the derived unit. For example the unit symbol Farad is defined as F instead of CPerV. In cases where a standard symbol does not exist for a derived unit the formula for the unit is used as the unit symbol. For example density does not have a standard symbol and so it is represented as kgPerm3. With the exception of the kg which is an SI unit the unit symbols do not contain multipliers and therefore represent the base derived unit to which a multiplier can be applied as a whole. Every unit symbol is treated as an unparseable text as if it were a singleletter symbol. The meaning of each unit symbol is defined by the accompanying descriptive text and not by the text contents of the unit symbol.To allow the widest possible range of serializations without requiring special character handling several substitutions are made which deviate from the format described in IEC 800001. The division symbol is replaced by the letters Per. Exponents are written in plain text after the unit as m3 instead of being formatted as m with a superscript of 3 or introducing a symbol as in m3. The degree symbol is replaced with the letters deg. Any clarification of the meaning for a substitution is included in the description for the unit symbol.NonSI units are included in list of unit symbols to allow sources of data to be correctly labelled with their nonSI units for example a GPS sensor that is reporting numbers that represent feet instead of meters. This allows software to use the unit symbol information correctly convert and scale the raw data of those sources into SIbased units. The integer values are used for harmonization with IEC 61850."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.iec.ch/TC57/CIM#UnitMultiplier.G
+<http://www.iec.ch/TC57/CIM#UnitMultiplier.G> rdf:type owl:NamedIndividual ,
+                                                       <http://www.iec.ch/TC57/CIM#UnitMultiplier> .
+
+
+###  http://www.iec.ch/TC57/CIM#UnitMultiplier.M
+<http://www.iec.ch/TC57/CIM#UnitMultiplier.M> rdf:type owl:NamedIndividual ,
+                                                       <http://www.iec.ch/TC57/CIM#UnitMultiplier> .
+
+
+###  http://www.iec.ch/TC57/CIM#UnitMultiplier.k
+<http://www.iec.ch/TC57/CIM#UnitMultiplier.k> rdf:type owl:NamedIndividual ,
+                                                       <http://www.iec.ch/TC57/CIM#UnitMultiplier> .
+
+
+###  http://www.iec.ch/TC57/CIM#UnitSymbol.W
+<http://www.iec.ch/TC57/CIM#UnitSymbol.W> rdf:type owl:NamedIndividual ,
+                                                   <http://www.iec.ch/TC57/CIM#UnitSymbol> .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

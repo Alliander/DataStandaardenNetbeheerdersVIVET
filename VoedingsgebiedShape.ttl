@@ -7,12 +7,15 @@
 @prefix cim: <http://iec.ch/TC57/2013/CIM-schema-cim16#>  .
 @prefix bs: <https://w3id.org/def/basicsemantics-owl#>
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix gce: <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit# > .
+@prefix vivet: <https://w3id.org/netbeheer/vivet/elektriciteit/geplandecapaciteit#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+@prefix gce: <https://w3id.org/netbeheer/vivet/profielen/GeplandeCapaciteit> .
 
 gce:SubstationShape 
 	a sh:NodeShape ;
 	rdfs:comment "shape describing the Substation object in the context of the planned capacity usecase" ;
-	targetClass cim:Substation ; 
+	sh:targetClass cim:Substation ; 
 	sh:property [ 
 		rdfs:comment "mRID is compulsory"
 		sh:path cim:IdentifiedObject.mRID ; 
@@ -31,14 +34,34 @@ gce:SubstationShape
 		sh:path geo:hasGeometry ;
 		sh:node gce:GeometryShape ;
 	];
+	sh:property[
+		rdfs:comment "the utility that operates substation"; 
+		sh:path vivet:VanNetbeheerder ;
+		sh:node gce:ServiceSupplierShape ;
+	];
 	sh:property [
-		sh:path gce:EquipmentContainer.OperationalLimitSet ;
+		sh:path cim:EquipmentContainer.OperationalLimitSet ;
 		sh:node gce:OperationalLimitSetShape ;
+		sh:minCount 1; 
+		
 	];
 	sh:property [
 		rdfs:comment "because the feeding area is a computed shape (voronoi) around the substation, we choose the make use of the cim:StringMeasurement class" ;
-		sh:path gce:Substation.Voedingsgebied ;
+		sh:path vivet:Voedingsgebied ;
 		sh:node gce:StringMeasurementShape ;
+		sh:minCount 1; 
+	];
+	sh:property [
+		rdfs:comment "the available capacity for feeding into the network is a calculation" ;
+		sh:path vivet:BeschikbareCapaciteitOpwek ;
+		sh:node gce:AnalogShape ;
+		sh:minCount 1; 
+	];
+	sh:property [
+		rdfs:comment "the available capacity for energy delivery by the network is a calculation" ;
+		sh:path vivet:BeschikbareCapaciteitVoeding ;
+		sh:node gce:AnalogShape ;
+		sh:minCount 1; 
 	]
 	.
 		
@@ -51,17 +74,15 @@ gce:GeometryShape
 gce:OperationalLimitSetShape
 	a sh:NodeShape ; 
 	sh:targetClass cim:OperationalLimitSet ;
-	sh:property [ 
-		rdfs:comment "mRID is compulsory"
-		sh:path cim:IdentifiedObject.mRID ; 
-		sh:datatype xsd:string ; 
-		sh:name "mRID" ;
+	sh:property [
+		sh:path dct:valid ;
+		sh:node gce:DateTimeIntervalShape ;
 		sh:minCount 1; 
-		sh:maxCount 1; 	
-	];
+	]
 	sh:property [
 		sh:path cim:OperationalLimitValue;
 		sh:node gce:ActivePowerLimitShape	;
+		sh:minCount 1; 
 	].
 	
 gce:ActivePowerLimitShape
@@ -70,28 +91,32 @@ gce:ActivePowerLimitShape
 	sh:property [
 		sh:path cim:ActivePowerLimit.value ;
 		sh:node gce:ActivePowerShape ;
+		sh:minCount 1; 
 	].
 
 gce:ActivePowerShape
 	a sh:NodeShape ;
-	sh:targetClass cim:ActivePower
-	property [
+	sh:targetClass cim:ActivePower ;
+	sh:property [
 		sh:path cim:ActivePower.multiplier ;
-		sh:in ("k" "M");
+		sh:in (cim:UnitMultiplier.k cim:UnitMultiplier.M);
+		sh:minCount 1; 
 	];
 	sh:property [
-		sh:path cim:ActivePower.unit
-		sh:in ("W")
+		sh:path cim:ActivePower.unit ;
+		sh:in (cim:UnitSymbol.W) ;
+		sh:minCount 1; 
 	];
 	sh:property [
 		sh:path cim:ActivePower.value ;
 		sh:datatype xsd:float ;
+		sh:minCount 1; 
 	].
 
 gce:StringMeasurementShape
 	a sh:NodeShape ; 
 	sh:targetClass cim:StringMeasurement;
-	property [
+	sh:property [
 		sh:path cim:Measurement.measurementType ;
 		sh:in ("Voronoi around Substation");
 	];
@@ -102,7 +127,76 @@ gce:StringMeasurementShape
 	
 gce:StringMeasurementValueShape
 	a sh:NodeShape ; 
+	sh:property[
+		sh:path cim:StringMeasurementValue.timeStamp ;
+		sh:datatype xsd:dateTime ;
+	];
+	sh:property [
+		sh:path cim:StringMeasurementValue.value ;
+		sh:node gce:Polygonshape ;
+	].
+
+gce:Polygonshape
+	a sh:NodeShape ;
+	sh:targetClass gml:Polygon .
 	
-			
-		
+gce:AnalogShape
+	a sh:NodeShape ; 
+	sh:targetClass cim:Analog ;
+	sh:property [
+		sh:path cim:IdentifiedObject.description ; 
+		sh:datatype xsd:string ;
+		sh:minCount 1;
+	];
+	sh:property [
+		sh:path cim:Measurement.UnitMultiplier ;
+		sh:in (cim:UnitMultiplier.k cim:UnitMultiplier.M);
+		sh:minCount 1;
+		sh:maxCount 1;
+	];
+	sh:property [
+		sh:path cim:Measurement.UnitSymbol ;
+		sh:in (cim:UnitSymbol.W);
+		sh:minCount 1;
+		sh:maxCount 1;
+	];
+	sh:property [
+		sh:path cim:Analog.AnalogValues;
+		sh:node gce:AnalogValueShape;
+		sh:minCount 1;
+	].
+
+gce:AnalogValueShape
+	a sh:NodeShape ;
+	sh:targetClass cim:AnalogValue ; 
+	sh:property	[
+		sh:path cim:AnalogValue.value;
+		sh:datatype xsd:float ;
+	];	
+	sH:property [
+		sh:path cim:StringMeasurementValue.timeStamp ;
+		sh:datatype xsd:dateTime .
+	].
+
+
+gce:DateTimeIntervalShape 
+	a sh:NodeShape ;
+	sh:targetClass cim:DateTimeInterval	;	
+
+gce:ServiceSupplierShape
+	a sh:NodeShape ;
+	sh:targetClass cim:ServiceSupplier ;
+	sh:property [
+		sh:path foaf:homepage ;
+		sh:minCount 1 ; 
+	];
+	sh:property [ 
+		rdfs:comment "mRID is compulsory"
+		sh:path cim:IdentifiedObject.mRID ; 
+		sh:datatype xsd:string ; 
+		sh:name "mRID" ;
+		sh:minCount 1; 
+		sh:maxCount 1; 
+	];
+	.
 		

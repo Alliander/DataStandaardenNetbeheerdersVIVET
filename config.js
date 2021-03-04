@@ -1,7 +1,9 @@
 var respecConfig = {
   specStatus: "GN-WV",
   specType: "ST",
-  //publishDate: "2020-03-23",
+  publishDate: "2021-01-18",
+  previousPublishDate: "2020-12-31",
+  previousMaturity: "LC",
   editors: [
         { name: "Jan Bruinenberg", company: "Alliander", companyURL: "https://www.alliander.com" },
 		{ name: "Ivo Kuijlaars",company: "Enexis", companyURL: "https://www.enexis.nl" },
@@ -15,6 +17,7 @@ var respecConfig = {
   github: "https://github.com/Alliander/DataStandaardenNetbeheerdersVIVET",
   issueBase: "https://github.com/Alliander/DataStandaardenNetbeheerdersVIVET/issues/",
   maxTocLevel: 3,
+  
   logos: [
     {
       src: "https://www.netbeheernederland.nl/_upload/News/Logo_Netbeheer_Nederland_RGB-1244.jpg?mode=crop&h=768&scale=both&w=1600",

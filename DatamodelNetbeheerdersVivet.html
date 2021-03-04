@@ -117,7 +117,9 @@
 	en de netten van de regionale netbeheerders aan bij de regionale netbeheerders. </p>
 	
 	<p>Met als basis de publicatiedatum van de kaart wordt inzicht gegeven in de huidige 
-	capaciteit en een voorspelling van de capaciteit binnen 3, 5 en 10 jaar </p>
+	capaciteit en een voorspelling van de capaciteit binnen 3, 5 en 10 jaar </p> 
+	
+	### tijdspanne aan de hand van jaren, expliciet aan de kaartlaag gekoppels
 	
  </section>
  
@@ -165,10 +167,7 @@
 		<li><p>Investeringsplanning tijd (jaartal of n.v.t.) </p></li>
 	
 	</ol>
-	
 
-	
-	
  </section>
  
 <!-- 
@@ -181,38 +180,13 @@
  </section>
 
   
-   <section >
+   <section id="referentieStandaarden">
     <h1>Relevante Informatie standaarden</h1>
 	<p>In dit hoofdstuk lichten we een aantal relevante referentie modellen
 	toe en wanneer we ze wel of niet gebruikt hebben</p>
 	
-	   <section >
-    <h2>IMKL</h2>
-	<h3>Introductie </h3>
-	<p> Het Informatie Model Kabels en Leidingen (IMKL) 
-	is momenteel het referentie model waarmee liggingsgegevens over de energienetten 
-	in Nederland worden gepubliceerd. Het model wordt gepubliceerd door GeoNovum. Het 
-	is een Nederlandse uitbreiding op het Europese Inspire informatie [[inspire-md]] model. </p>
-	
-	<h3>Informatiedomein </h3>
-	<p>Het informatie model richt zich vooral op geo toepassingen, waarmee het zeer
-	geschikt is om liggingsgegevens te tonen op de kaart, maar in minderen mate om 
-	technische gegevens (zoals beschikbare capaciteit) te publiceren. </p>
-	
-	<h3>Wanneer wel/niet gebruikt </h3>
-	<p>Hoewel dit model de relevante netonderdelen beschrijft, biedt het te weinig 
-	opties voor het ontsluiten van de gevraagde technische informatie. En omdat de 
-	geometrische liggingsgegevens in  IMKL/Inspire conform GML/Geosparql worden gepubliceerd, 
-	worden deze standaarden voor deze usecase geprefereerd over IMKL.</p>
-	
-	<p>Door het belang van IMKL/Inspire binnen de omgevingswet en de interactie 
-	tussen de Omgevingswet en de energie transitie zal een logische mapping gespecificeerd 
-	worden tussen IEC-CIM en IMKL zodat de gegevens uit deze usecase ook in die context gebruikt 
-	kunnen worden.
-	</p>
-	   </section >
 	   
-	   <section >
+	   <section id="cim">
 	<h2>IEC-CIM</h2>
 	<h3>Introductie </h3>
 	<p> Het IEC Common Information Model (CIM) is een IEC-standaard die semantisch het 
@@ -222,23 +196,17 @@
 	om vraagt worden voornamelijk conform IEC-CIM uit gedrukt. </p>
 	
 	<h3>Informatiedomein </h3>
-	<p>Het informatie model richt zich vooral op geo toepassingen, waarmee het zeer geschikt 
-	is om liggingsgegevens te tonen op de kaart, maar in minderen mate om technische gegevens 
-	(zoals beschikbare capaciteit) te publiceren. </p>
+	<p> Het IEC-CIM beschrijft het elektriciteitsnetwerk en de werkzaamheden, metingen 
+		gebeurtenissen etcetera die daaromheen plaats vinden. </p>
 	
 	<h3>Wanneer wel/niet gebruikt </h3>
-	<p>Hoewel dit model de relevante netonderdelen beschrijft, biedt het te weinig opties 
-	voor het ontsluiten van de gevraagde technische informatie. En omdat de geometrische 
-	liggingsgegevens in  IMKL/Inspire conform GML/Geosparql worden gepubliceerd, worden deze 
-	standaarden voor deze usecase geprefereerd over IMKL. </p>
+	<p>Het IEC-CIM eordt gebruikt voor de definities van onderdelen van het elektriciteitsnet (vooralsnog slechts het station), 
+		rollen rondom het electriciteitsnet (de Netbeheerdersrol) en observaties en/of berekeningen aan het energienet. </p>
 	
-	<p>Door het belang van IMKL/Inspire binnen de omgevingswet en de interactie tussen de 
-	Omgevingswet en de energie transitie zal een logische mapping gespecificeerd worden 
-	tussen IEC-CIM en IMKL zodat de gegevens uit deze usecase ook in die context gebruikt 
-	kunnen worden. </p>
+	<p> </p>
 	   </section >
 	
-	   <section >
+	   <section id="geosparql">
 	<h2>Geosparql/GML</h2>
 	<h3>Introductie </h3>
 	<p>Geosparql [[geosparql]] is de linked data interpretatie van GML (Geography Markup Language) [[gml]]. Het model 
@@ -252,7 +220,7 @@
 	<p>Geosparql wordt gebruikt om geometrische weergaven van de netonderdelen te definiëren. </p>
 	   </section >   
 	   
-	     <section > 
+	     <section id="bs"> 
 	<h2>NTA 8035/Basic Semantics</h2>
 	<h3>Introductie </h3>
 	<p>NTA 8035 beschrijft de semantische modellering in de gebouwde omgeving. Het biedt een hoofdstructuur 
@@ -270,6 +238,49 @@
 	voor de bouw-sector. Om deze reden zal er ook eenlogische mapping gedefinieerd worden van 
 	het model voor deze usecase naar Basic Semantics. </p>
    </section >
+   
+   
+	 <section id="imkl">
+    <h2>IMKL</h2>
+	<h3>Introductie </h3>
+	<p> Het Informatie Model Kabels en Leidingen (IMKL) 
+	is momenteel het referentie model waarmee liggingsgegevens over de energienetten 
+	in Nederland worden gepubliceerd. Het model wordt gepubliceerd door GeoNovum. Het 
+	is een Nederlandse uitbreiding op het Europese Inspire informatie [[inspire-md]] model. </p>
+	
+	<h3>Informatiedomein </h3>
+	<p>Het informatie model richt zich vooral op geo toepassingen, waarmee het zeer
+	geschikt is om liggingsgegevens te tonen op de kaart, maar in minderen mate om 
+	technische gegevens (zoals beschikbare capaciteit) te publiceren. </p>
+	
+	<h3>Wanneer wel/niet gebruikt </h3>
+	<p>Hoewel dit model de relevante netonderdelen beschrijft, biedt het te weinig 
+	opties voor het ontsluiten van de gevraagde technische informatie. En omdat de 
+	geometrische liggingsgegevens in  IMKL/Inspire conform GML/Geosparql worden gepubliceerd, 
+	worden IEC-CIM en GML/Geosparql voor deze usecase geprefereerd over IMKL.</p>
+	
+	<p>Door het belang van IMKL/Inspire binnen de omgevingswet en de interactie 
+	tussen de Omgevingswet en de energie transitie zal een logische mapping gespecificeerd 
+	worden tussen IEC-CIM en IMKL zodat de gegevens uit deze usecase ook in die context gebruikt 
+	kunnen worden.
+	</p>
+	</section >
+   
+  </section>
+
+  <section id="capaciteitsmodel">
+
+	<h1>Profiel voor publicatie van capaciteitsdata</h1>
+
+	<h1>Overzicht</h1>
+	<figure id="LiggingCapaciteitDiagram">
+		<img src="LiggingenCapaciteit.png" alt="" />
+		<figcaption>Overzicht diagram van het data model voor ligging en capaciteit.</figcaption>
+	  </figure>
+
+	<h1>Data Definities</h1>
+	
+
   </section>
   
 	<section class="appendix informative" id="glossary">
@@ -289,9 +300,6 @@
 	
  </section>
     
-  
-  
-
 
   
 </body>
