@@ -9,9 +9,6 @@
 
 </head>
 
-
-
-
 <body>
   <section id="abstract">
     <p> Dit Document beschrijft de datadefinities die gebruikt 
@@ -271,14 +268,110 @@
   <section id="capaciteitsmodel">
 
 	<h1>Profiel voor publicatie van capaciteitsdata</h1>
+	<section id="modeloverzicht">
 
-	<h1>Overzicht</h1>
+	<h2>Overzicht</h2>
 	<figure id="LiggingCapaciteitDiagram">
 		<img src="LiggingenCapaciteit.png" alt="" />
 		<figcaption>Overzicht diagram van het data model voor ligging en capaciteit.</figcaption>
 	  </figure>
+	</section>
 
-	<h1>Data Definities</h1>
+	<section id="datadefinities">
+
+	<h2>Data Definities</h2>
+
+	<figure id="LiggingCapaciteitDiagram">
+		<img src="Figures/799px-Perpignan_TGV_225kV_substation.jpg" alt="" />
+		<figcaption>Voorbeeld van een Hoogspanningsstation.</figcaption>
+	  </figure>
+
+	<h3>Substation (station)</h3>
+
+	<p> De IEC-CIM definieerd een "Substation" ("station" in het Nederlands) als een verzameling van componenten (bijvoorbeeld 
+		Transformatoren, Schakelaars, zekeringen en sensoren), maar geen opwek installaties, die 
+		elektriciteit doorvoert ten behoeven van schakelen en verdelen. </p>
+
+		<figure id="Hoogspanningsstation">
+			<img src="Figures/799px-Perpignan_TGV_225kV_substation.jpg" alt="" />
+			<figcaption>Voorbeeld van een Hoogspanningsstation.</figcaption>
+		  </figure>
+
+	<p>Stations zijn de belangrijke knooppunten in het elektriciteitsnerwerk, analoog aan een bus/treinstation 
+		of een knooppunt op de snelweg. Netwerken van verschillende 
+		netbeheerders zijn met elkaar verbonden via stations. Zware aansluitingen (bijvoorbeeld een fabriek, een zonne- en/of windpark) 
+		worden of direct aangesloten op een bestaand station, of er wordt een nieuw station voor gebouwd. 
+		Functioneel kun je een station zien als een uit de kluiten gewassen groepenkast in de meterkast. Dus, af hankelijk van hoe abstract je naar de 
+		wereld wilt kijken, zijn huizen ook via een klein stationnetje in de meterkast aangesloten op het energie netwerk.</p>	  
+
+
+	<h3>Aangelegde Capaciteit (OperationalLimit)</h3>
+	
+	<p>het IEC-CIM verdeeld de aangelegde capaciteit over 2 objecten: de operational</p>
+	
+	<h3>Measurement en MeasurementValue (metingen en meetwaarden)</h3>
+
+	<figure id="MeasurmentMeasurementValue">
+		<img src="Figures/MeasurementMeasurementValue.png" alt="" />
+		<figcaption>Voorbeeld van een Hoogspanningsstation.</figcaption>
+	  </figure>
+
+	<p> Het IEC-CIM definieerd metingen en meetwaarden als twee aparte objecten.</p>
+	
+	<p> Een Measurement (meting), gedefinieerd als een gemeten of berekende grootheid. In CIM is 
+		een Measurement in princiepe gekoppeld aan een specifiek onderdeel van het net. 
+		Bijvoorbeeld: Een spanningsmeting op "kabel 1" en een spanningsmeting in "kabel 2" zijn dus verschillende 
+		instanties van Measurement. Je kunt Measurement dus interpreteren als alle contextuele metadata 
+		(wat wordt er gemeten, waar wordt het gemeten etc.)
+		rondom een meetwaarde. </p>
+
+	<p>Een MeauremenValue (meetwaarde) is een generieke classificatie van een specfieke meeting, in 
+		princiepe aan de hand van een timestamp en een waarde. Bijvoorbeeld, bij de Measurement 
+		"spanningsmeting op kabel 1", is een specifieke meetwaarde "9.98 kV op 10:15 GMT op 1 januari 2021"</p>	
+
+	<h4> Voedingsgebied als StringMeasurement en StringMeasurementValue </h4>
+
+	<p> Het voedingsgebied is typisch de regio die door een specifiek station gevoed wordt. Echter, het energienet is 
+	is een complex geheel dat zich niet netjes aan geografische grenzen houdt. In het figuur hieronder zie welke delen van 
+	Flevoland gevoed worden door welk station. 
+</p>
+
+	<figure id="realistischVoedingsgebied">
+		<img src="Figures/voedingsgebied.PNG" alt="" />
+		<figcaption>Voorbeeld van gebieden die gevoed worden door 1 station vanuit een technisch perspectief.</figcaption>
+	  </figure>
+
+
+	  <p>Duidelijk wordt dat dit geen uniforme gebieden zijn maar dat er ook enclaves 
+		ontstaan etcetera. De de informatiebehoefte die we hier pogen te beantwoorden is niet technisch van aard, maar beleidsmatig. 
+		Om die reden kiezen we er voor om niet zo zeer het technisch voedingsgebied te tonen maar een berekende Voronoi (zie diagram hieronder) rondom de stations. 
+		Immers, een exact voedingsgebied is een moment opname die iets zegt over technische beslissingen in het verleden. 
+		Voor de plaatsing van nieuwe opwek installaties zal een specifiekere berekening gemaakt moeten worden in overleg met de gebieds experts van desbetreffende netbeheerder.
+		Dit betekend dat het vlak dat getoond word aangeeft welk station het dichtst bij is. Deze vereenvoudiging 
+		geeft het beste het station weer waarop een nieuw initiatief het meest waarschijnlijk wordt aangesloten. </p>
+
+
+		<figure id="VereenvoudigdVoedingsgebied">
+			<img src="Figures/Euclidean_Voronoi_diagram.svg.png" alt="" />
+			<figcaption>Voorbeeld van een voronoi diagram [[voronoi]].</figcaption>
+		  </figure>
+
+		 <p> Deze voronoi berekening wordt dus gemodelleerd als cim:StringMeasurement (een specialisatie van cim:Measurement)
+			 en de berekende voronoi wordt als geometrie opgenmomen in de cim:StringMeasurementValue.
+		 </p> 
+
+<h4>Beschikbare capaciteit als Analog en AnalogValue </h3>
+
+	Net als het voedingsgebied, is de beschikbare capaciteit op het net een berekende waade. Immers, het is het verschil tussen 
+	de capaciteit van het net zoals het er nu gebouwd is, en de capaciteit in het net die nu al gebruikt wordt. 
+	Hoe precies bepaald wordt 'wat de capaciteit is die nu al gebruikt wordt', is aan de netbeheerder. Dit kan De contractuele capaciteit betreffen, 
+	of (een statistische benadering van) de maximale last op een gevegeven moment op het net zit. Dit hangt af van het beleid van de netbeheerder.
+
+		
+
+	</section>
+
+
 	
 
   </section>

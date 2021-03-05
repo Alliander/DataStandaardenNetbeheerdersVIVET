@@ -50,7 +50,12 @@ var respecConfig = {
       "date": "14-12-2020",
       "publisher": "Ministerie van Economische Zaken en Klimaat",
     },
-	
+		"voronoi": {
+      "href": "https://en.wikipedia.org/wiki/Voronoi_diagram#/media/File:Euclidean_Voronoi_diagram.svg",
+      "title": "20 points and their Voronoi cells",
+      "authors": ["Balu Ertl "],
+      "date": "22-02-2015",
+    },
   }
   
 };
