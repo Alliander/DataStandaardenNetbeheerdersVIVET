@@ -167,13 +167,7 @@
 
  </section>
  
-<!-- 
-  <section id= "">
-	<h2> </h2>
-	<p> </p>
- </section>
-  -->
-  
+
  </section>
 
   
@@ -271,6 +265,13 @@
 	<section id="modeloverzicht">
 
 	<h2>Overzicht</h2>
+
+	<p>
+		In het diagram hieronder vindt je het Logische model dat informatiebehoefte rondom capaciteit 
+		in de stations beschrijft.
+
+	</p>
+
 	<figure id="LiggingCapaciteitDiagram">
 		<img src="LiggingenCapaciteit.png" alt="" />
 		<figcaption>Overzicht diagram van het data model voor ligging en capaciteit.</figcaption>
@@ -281,11 +282,8 @@
 
 	<h2>Data Definities</h2>
 
-	<figure id="LiggingCapaciteitDiagram">
-		<img src="Figures/799px-Perpignan_TGV_225kV_substation.jpg" alt="" />
-		<figcaption>Voorbeeld van een Hoogspanningsstation.</figcaption>
-	  </figure>
 
+	  <section>
 	<h3>Substation (station)</h3>
 
 	<p> De IEC-CIM definieerd een "Substation" ("station" in het Nederlands) als een verzameling van componenten (bijvoorbeeld 
@@ -303,12 +301,31 @@
 		worden of direct aangesloten op een bestaand station, of er wordt een nieuw station voor gebouwd. 
 		Functioneel kun je een station zien als een uit de kluiten gewassen groepenkast in de meterkast. Dus, af hankelijk van hoe abstract je naar de 
 		wereld wilt kijken, zijn huizen ook via een klein stationnetje in de meterkast aangesloten op het energie netwerk.</p>	  
+	</section>
 
-
+	<section>
 	<h3>Aangelegde Capaciteit (OperationalLimit)</h3>
-	
-	<p>het IEC-CIM verdeeld de aangelegde capaciteit over 2 objecten: de operational</p>
-	
+
+	<p>het IEC-CIM verdeeld de informatie behoefte rond aangelegde capaciteit over 2 soortheb objecten: 
+		de OperationalLimit en OperationalLimitSet. De OperationalLimitSet is de combinatie van OperationalLimits 
+		die gezamenlijk de 'capaciteit' van een onderdeel in het net bepalen. In het geval van deze usecase is men 
+		vooral geinteresseerd in de OperationalLimit die de ActivePower (het werkelijke vermogen) beschrijft: 
+		de ActivePowerLimit.
+	</p>
+
+	<p>
+		Strikt genomen koppelt het IEC-CIM de OperationalLimitSet aan een geleidend component (ConductingEquipment). 
+		Vanuit een technisch perspectief is het namelijk een beetje gek om te zeggen dat een 'Station' een capaciteit heeft 
+		omdat een station immers zelf geen stroom geleid (formeel gezien doen slechts de geleidende compontenten in het 
+		station dat). Wij zien echter dat als we ons hier strikt aan de standaard houden, dat het informatiemodel dusdanig 
+		complex wordt dat kans aanwezig is dat de doelgroep deze informatie niet juist meer kan interpreteerd. Vandaar dat we de
+		relatie van ConductingEquipment naar OperationalLimitSet ruimer hebben geinterpreteerd zodat we deze deze OperationalLimitSet
+		direct aan het Substation (Station) koppelen.
+	</p>
+
+</section>
+
+<section>
 	<h3>Measurement en MeasurementValue (metingen en meetwaarden)</h3>
 
 	<figure id="MeasurmentMeasurementValue">
@@ -329,6 +346,7 @@
 		princiepe aan de hand van een timestamp en een waarde. Bijvoorbeeld, bij de Measurement 
 		"spanningsmeting op kabel 1", is een specifieke meetwaarde "9.98 kV op 10:15 GMT op 1 januari 2021"</p>	
 
+
 	<h4> Voedingsgebied als StringMeasurement en StringMeasurementValue </h4>
 
 	<p> Het voedingsgebied is typisch de regio die door een specifiek station gevoed wordt. Echter, het energienet is 
@@ -343,12 +361,17 @@
 
 
 	  <p>Duidelijk wordt dat dit geen uniforme gebieden zijn maar dat er ook enclaves 
-		ontstaan etcetera. De de informatiebehoefte die we hier pogen te beantwoorden is niet technisch van aard, maar beleidsmatig. 
+		ontstaan etcetera. Daarnaast zijn dit de voedingsgebieden aan de hand van de zogenaamde normaalstanden van de schakelaars. 
+		Als er ter behoeven van storingen of onderhoud geschakeld wordt, kan het zijn dat een aansluiting tijdelijk door een ander 
+		station gevoed wordt. Het voedingsgebied van een station is dus niet statisch. </p>
+
+		<p> De de informatiebehoefte die we hier pogen te beantwoorden is niet technisch van aard, maar beleidsmatig. 
 		Om die reden kiezen we er voor om niet zo zeer het technisch voedingsgebied te tonen maar een berekende Voronoi (zie diagram hieronder) rondom de stations. 
 		Immers, een exact voedingsgebied is een moment opname die iets zegt over technische beslissingen in het verleden. 
 		Voor de plaatsing van nieuwe opwek installaties zal een specifiekere berekening gemaakt moeten worden in overleg met de gebieds experts van desbetreffende netbeheerder.
 		Dit betekend dat het vlak dat getoond word aangeeft welk station het dichtst bij is. Deze vereenvoudiging 
-		geeft het beste het station weer waarop een nieuw initiatief het meest waarschijnlijk wordt aangesloten. </p>
+		geeft het beste het station weer waarop een nieuw initiatief het meest waarschijnlijk wordt aangesloten, 
+		en dus de mate waarin er nog ruimte is op het net in dat gebied</p>
 
 
 		<figure id="VereenvoudigdVoedingsgebied">
@@ -367,7 +390,7 @@
 	Hoe precies bepaald wordt 'wat de capaciteit is die nu al gebruikt wordt', is aan de netbeheerder. Dit kan De contractuele capaciteit betreffen, 
 	of (een statistische benadering van) de maximale last op een gevegeven moment op het net zit. Dit hangt af van het beleid van de netbeheerder.
 
-		
+</section>	
 
 	</section>
 

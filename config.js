@@ -4,14 +4,16 @@ var respecConfig = {
   publishDate: "2021-01-18",
   previousPublishDate: "2020-12-31",
   previousMaturity: "LC",
+  authors : [
+    { name: "Joep van Genuchten", company: "Alliander", companyURL: "https://www.alliander.com" },
+    { name: "Frank Boere",company: "Enduris", companyURL: "https://www.enduris.nl" },
+  ],
   editors: [
-        { name: "Jan Bruinenberg", company: "Alliander", companyURL: "https://www.alliander.com" },
+    { name: "Jan Bruinenberg", company: "Alliander", companyURL: "https://www.alliander.com" },
 		{ name: "Ivo Kuijlaars",company: "Enexis", companyURL: "https://www.enexis.nl" },
 		{ name: "Sefanja Severin",company: "Stedin", companyURL: "https://www.stedin.net" },
-		{ name: "Frank Boere",company: "Enduris", companyURL: "https://www.enduris.nl" },
 		{ name: "Richard Flierman",company: "TenneT", companyURL: "https://www.tennet.eu" },
 		{ name: "George Argyropoulos", company: "Stedin", companyURL: "https://www.stedin.net" },
-		{ name: "Joep van Genuchten", company: "Alliander", companyURL: "https://www.alliander.com" },
       ],
 
   github: "https://github.com/Alliander/DataStandaardenNetbeheerdersVIVET",
