@@ -41,25 +41,13 @@
 	<p>VIVET heeft aan de Netbeheerders gevraagd om ten behoeve van de energietransities 3 datasets 
 	als open data te delen die in een eenduidig format landelijk ontsloten kunnen worden. Dit document
 	beschrijft de specificaties van informatieproduct 1: Kaartlaag capaciteit en investeringen 
-	hoogspanningsstations. </p>
+	stations 25 kV en hoger. </p>
  
  </section>
  
  <section id="uitgangspunten">
  <h1> Uitgangspunten </h1> 
  
- <section id="bestandsformaat">
- <h2>Bestandformaat</h2>
-	<p>Shapefile of filegeodatabase.
-	De drie beschreven informatieproducten bestaan uit vlakken, lijnen en/of punten. 
-	Deze kunnen worden geleverd in één van de meest gebruikte standaard GIS formaten van 
-	ESRI: Shape (.shp) of Filegeodatabase (.gdb). Dit bestandsformaat maakt het mogelijk dat 
-	het Kadaster de verschillende datasets kan samenvoegen en controleren en vervolgens beschikbaar 
-	kan stellen.
-	In sommige bestanden is een geografische ligging op een kaart te tonen. 
-	Hiervoor dient u het referentiesysteem “Amersfoort / RD New” te gebruiken,
-	ook wel bekend onder de naam EPSG: 28992.</p>
- </section>
  
  <section id= "doelgroep">
 	<h2> Doelgroep </h2>
@@ -80,7 +68,7 @@
  
      <section id= "verwantepublicaties">
 	<h2>Verwante Publicaties </h2>
-	<p>Er wordt volledig aangesloten bij bestaande publicaties op het gebied van 
+	<p>Er wordt aangesloten bij bestaande publicaties van de regionale netbeheerders op het gebied van 
 	netcapaciteit en investeringen, te weten: Investeringsplannen en kaarten met gebieden
 	waar sprake is van transportschaarste. </p>
  </section>
@@ -90,10 +78,10 @@
 	<p>De kaarten zijn indicatief en bieden geen instrument voor de vaststelling of en op 
 	welk station een geplande aansluiting gerealiseerd kan worden</p>
 
-	<p>De kaarten geven primair inzicht in de mogelijkheid voor nieuwe grootschalige 
+	<p>De kaarten geven uitsluitend inzicht in de mogelijkheid voor nieuwe grootschalige 
 	invoeding/opwek of afname van elektriciteit op het elektriciteitsnet van de regionale netbeheerders.</p>
 	
-	<p>De verzorgingsgebieden zijn een simplificatie van de werkelijke netsituatie en inidicatief</p>
+	<p>De verzorgingsgebieden zijn een simplificatie van de werkelijke netsituatie en indicatief</p>
 	
 	<p>Bij de investeringsplanning voor vermogen kunnen transportbeperkingen gelden vanuit het 
 	hoogspanningsnet van de landelijke netbeheerder TenneT. Hierdoor kan mogelijk niet (direct) 
@@ -103,20 +91,19 @@
  
    <section id= "dataverwerkingsprocess">
 	<h2>Dataverwerkingsprocess </h2>
-	<p>Elke regionale netbeheerder levert de data van zijn verzorgingsgebied aan bij PDOK. </p>
-	
-	<p>PDOK voegt de afzonderlijke producten samen tot een geheel en publiceert het geheel. </p>
-	
-	<p>Data wordt maandelijks vernieuwd, mits daar inhoudelijke aanleiding voor is door elke 
-	regionale netbeheerder. </p>
-	
-	<p>TenneT levert capaciteitsbeperkingen op de koppelpunten tussen het landelijk hoogspanningsnet 
-	en de netten van de regionale netbeheerders aan bij de regionale netbeheerders. </p>
-	
-	<p>Met als basis de publicatiedatum van de kaart wordt inzicht gegeven in de huidige 
-	capaciteit en een voorspelling van de capaciteit binnen 3, 5 en 10 jaar </p> 
-	
-	### tijdspanne aan de hand van jaren, expliciet aan de kaartlaag gekoppels
+	<p>
+		Elke regionale netbeheerder levert elke eerste werkdag van de maand zijn dataset aan 
+		bij PDOK. PDOK voegt de afzonderlijke datasets samen en publiceert de samengevoegde dataset.</p>
+		
+		<p>
+		Uitgaande van de publicatiedatum van de dataset (de eerste werkdag van de maand) wordt inzicht 
+		gegeven in de huidige capaciteit en een voorspelling van de capaciteit over 3, 5 en 10 jaar.
+	</p>
+		
+		<p>
+		TenneT levert capaciteitsbeperkingen op de koppelpunten tussen het landelijk
+		 hoogspanningsnet en de netten van de regionale netbeheerders aan bij de regionale netbeheerders.
+		</p>
 	
  </section>
  
@@ -138,18 +125,21 @@
 	transformatoren binnen het station) voor afname. Voor invoeding/opwek mag vanaf 01-01-2021 het 
 	n-0 veilig vermogen gehanteerd worden. Zie het Ministerieel Besluit hierover [[minbesluit]].</p>
 	
-	<p>Beschikbare capaciteit voor invoeding/opwek of afname: Om synchroniteit met kaarten over 
-	transportschaarste te borgen de berekening op dezelfde manier uitvoeren. In hoofdlijnen voert 
-	elke netbeheerder dezelfde berekening uit.
- </p>
+	<p>Beschikbare capaciteit voor invoeding/opwek of afname: Om consistentie met al bestaande kaarten over 
+	transportschaarste te borgen wordt de berekening voor beschikbare capaciteit op dezelfde manier uitgevoerd.
+	Beschikbare capaciteit (vermogen, P) voor invoeding/afname is het verschil tussen  het vermogen van het aangelegde
+	net en de  al gerealiseerde of geplande vermogens van de aansluitingen die door het station gevoed (zullen) worden.</p> 
+
+	<aside class="example" title= "Illustratie van berkening voor capaciteit">
+		<pre>
+		P_station= P_zwaksteComponent-P_gerealiseerd-P_gepland
+		</pre>
+	  </aside>
 	
-	<p>Beschikbare capaciteit van de zwakste schakel van het station (b.v. transformatorcapaciteit, 
-	railcapaciteit, vrije velden, transportbeperkingen bovenliggend TenneT net) – reeds gerealiseerde 
-	capaciteit – capaciteit van projecten in de pijplijn. </p>
-	
-	<p>Tussen netbeheerders onderling zullen hier naar aanleiding van de netsituatie ter plekke 
-	nuanceverschillen in de berekeningen zitten. Elke netbeheerder is verantwoordelijk voor zijn 
-	eigen berekening en borgt dat deze in lijn is en blijft met de berekening voor transportschaarste. </p>
+	<p>Eventuele uniformering van rekenmethodes op detailniveau valt buiten de scope 
+		van deze standaard. De door de netbeheerder toegepaste rekenmethode moet echter 
+		wel identiek zijn aan de reeds bestaande rekenmethode voor de publicatie van 
+		transportschaarste zodat verschillende publicaties elkaar niet tegenspreken. </p>
 	
 	<p>De volgende informatie wordt 1 op 1 overgenomen uit de Investeringsplannen van de regionale 
 	netbeheerders: </p>
@@ -188,11 +178,11 @@
 	
 	<h3>Informatiedomein </h3>
 	<p> Het IEC-CIM beschrijft het elektriciteitsnetwerk en de werkzaamheden, metingen 
-		gebeurtenissen etcetera die daaromheen plaats vinden. </p>
+		gebeurtenissen et cetera die daaromheen plaats vinden. </p>
 	
 	<h3>Wanneer wel/niet gebruikt </h3>
-	<p>Het IEC-CIM eordt gebruikt voor de definities van onderdelen van het elektriciteitsnet (vooralsnog slechts het station), 
-		rollen rondom het electriciteitsnet (de Netbeheerdersrol) en observaties en/of berekeningen aan het energienet. </p>
+	<p>Het IEC-CIM wordt gebruikt voor de definities van onderdelen van het elektriciteitsnet (vooralsnog slechts het station), 
+		rollen rondom het elektriciteitsnet (de Netbeheerdersrol) en observaties en/of berekeningen aan het elektriciteitsnet. </p>
 	
 	<p> </p>
 	   </section >
@@ -250,8 +240,8 @@
 	geometrische liggingsgegevens in  IMKL/Inspire conform GML/Geosparql worden gepubliceerd, 
 	worden IEC-CIM en GML/Geosparql voor deze usecase geprefereerd over IMKL.</p>
 	
-	<p>Door het belang van IMKL/Inspire binnen de omgevingswet en de interactie 
-	tussen de Omgevingswet en de energie transitie zal een logische mapping gespecificeerd 
+	<p>Door het belang van IMKL/Inspire binnen de Omgevingswet en de interactie 
+	tussen de Omgevingswet en de energietransitie zal een logische mapping gespecificeerd 
 	worden tussen IEC-CIM en IMKL zodat de gegevens uit deze usecase ook in die context gebruikt 
 	kunnen worden.
 	</p>
@@ -269,7 +259,6 @@
 	<p>
 		In het diagram hieronder vindt je het Logische model dat informatiebehoefte rondom capaciteit 
 		in de stations beschrijft.
-
 	</p>
 
 	<figure id="LiggingCapaciteitDiagram">
@@ -280,7 +269,7 @@
 
 	<section id="datadefinities">
 
-	<h2>Data Definities</h2>
+	<h2>Toelichting op gebruik van definities in de context van deze usecase</h2>
 
 
 	  <section>
@@ -309,17 +298,17 @@
 	<p>het IEC-CIM verdeeld de informatie behoefte rond aangelegde capaciteit over 2 soortheb objecten: 
 		de OperationalLimit en OperationalLimitSet. De OperationalLimitSet is de combinatie van OperationalLimits 
 		die gezamenlijk de 'capaciteit' van een onderdeel in het net bepalen. In het geval van deze usecase is men 
-		vooral geinteresseerd in de OperationalLimit die de ActivePower (het werkelijke vermogen) beschrijft: 
+		vooral geïnteresseerd in de OperationalLimit die de ActivePower (het werkelijke vermogen) beschrijft: 
 		de ActivePowerLimit.
 	</p>
 
 	<p>
 		Strikt genomen koppelt het IEC-CIM de OperationalLimitSet aan een geleidend component (ConductingEquipment). 
 		Vanuit een technisch perspectief is het namelijk een beetje gek om te zeggen dat een 'Station' een capaciteit heeft 
-		omdat een station immers zelf geen stroom geleid (formeel gezien doen slechts de geleidende compontenten in het 
+		omdat een station immers zelf geen stroom geleidt (formeel gezien doen slechts de geleidende compontenten in het 
 		station dat). Wij zien echter dat als we ons hier strikt aan de standaard houden, dat het informatiemodel dusdanig 
-		complex wordt dat kans aanwezig is dat de doelgroep deze informatie niet juist meer kan interpreteerd. Vandaar dat we de
-		relatie van ConductingEquipment naar OperationalLimitSet ruimer hebben geinterpreteerd zodat we deze deze OperationalLimitSet
+		complex wordt dat de kans aanwezig is dat de doelgroep deze informatie niet juist meer kan interpreteren. Vandaar dat we de
+		relatie van ConductingEquipment naar OperationalLimitSet ruimer hebben geïnterpreteerd zodat we deze OperationalLimitSet
 		direct aan het Substation (Station) koppelen.
 	</p>
 
@@ -333,24 +322,26 @@
 		<figcaption>Voorbeeld van een Hoogspanningsstation.</figcaption>
 	  </figure>
 
-	<p> Het IEC-CIM definieerd metingen en meetwaarden als twee aparte objecten.</p>
+	<p> Het IEC-CIM definieert metingen en meetwaarden als twee aparte objecten.</p>
+
+	<p>Een MeasurementValue (meetwaarde) is een generieke classificatie van een specfieke meeting, in 
+		principe aan de hand van een timestamp en een waarde. Bijvoorbeeld, bij de Measurement 
+		"spanningsmeting op kabel 1", is een specifieke meetwaarde "9.98 kV op 10:15 GMT op 1 januari 2021".</p>
 	
-	<p> Een Measurement (meting), gedefinieerd als een gemeten of berekende grootheid. In CIM is 
-		een Measurement in princiepe gekoppeld aan een specifiek onderdeel van het net. 
+	<p> Een Measurement (meting), is de beschrijving van wat gemeten wordt en waar het gemeten wordt. In CIM is 
+		een Measurement in principe gekoppeld aan een specifiek onderdeel van het net. 
 		Bijvoorbeeld: Een spanningsmeting op "kabel 1" en een spanningsmeting in "kabel 2" zijn dus verschillende 
 		instanties van Measurement. Je kunt Measurement dus interpreteren als alle contextuele metadata 
 		(wat wordt er gemeten, waar wordt het gemeten etc.)
 		rondom een meetwaarde. </p>
 
-	<p>Een MeauremenValue (meetwaarde) is een generieke classificatie van een specfieke meeting, in 
-		princiepe aan de hand van een timestamp en een waarde. Bijvoorbeeld, bij de Measurement 
-		"spanningsmeting op kabel 1", is een specifieke meetwaarde "9.98 kV op 10:15 GMT op 1 januari 2021"</p>	
+	
 
 
 	<h4> Voedingsgebied als StringMeasurement en StringMeasurementValue </h4>
 
-	<p> Het voedingsgebied is typisch de regio die door een specifiek station gevoed wordt. Echter, het energienet is 
-	is een complex geheel dat zich niet netjes aan geografische grenzen houdt. In het figuur hieronder zie welke delen van 
+	<p> Het voedingsgebied is typisch de regio die door een specifiek station gevoed wordt. Echter, het elektriciteitsnet is 
+	is een complex geheel dat zich niet netjes aan geografische grenzen houdt. In het figuur hieronder zie je welke delen van 
 	Flevoland gevoed worden door welk station. 
 </p>
 
@@ -362,14 +353,14 @@
 
 	  <p>Duidelijk wordt dat dit geen uniforme gebieden zijn maar dat er ook enclaves 
 		ontstaan etcetera. Daarnaast zijn dit de voedingsgebieden aan de hand van de zogenaamde normaalstanden van de schakelaars. 
-		Als er ter behoeven van storingen of onderhoud geschakeld wordt, kan het zijn dat een aansluiting tijdelijk door een ander 
+		Als er vanwege storingen of onderhoud geschakeld wordt, kan het zijn dat een aansluiting tijdelijk door een ander 
 		station gevoed wordt. Het voedingsgebied van een station is dus niet statisch. </p>
 
-		<p> De de informatiebehoefte die we hier pogen te beantwoorden is niet technisch van aard, maar beleidsmatig. 
+		<p> De informatiebehoefte die we hier pogen te beantwoorden is niet technisch van aard, maar beleidsmatig. 
 		Om die reden kiezen we er voor om niet zo zeer het technisch voedingsgebied te tonen maar een berekende Voronoi (zie diagram hieronder) rondom de stations. 
 		Immers, een exact voedingsgebied is een moment opname die iets zegt over technische beslissingen in het verleden. 
 		Voor de plaatsing van nieuwe opwek installaties zal een specifiekere berekening gemaakt moeten worden in overleg met de gebieds experts van desbetreffende netbeheerder.
-		Dit betekend dat het vlak dat getoond word aangeeft welk station het dichtst bij is. Deze vereenvoudiging 
+		Dit betekent dat het vlak dat getoond word aangeeft welk station het dichtst bij is. Deze vereenvoudiging 
 		geeft het beste het station weer waarop een nieuw initiatief het meest waarschijnlijk wordt aangesloten, 
 		en dus de mate waarin er nog ruimte is op het net in dat gebied</p>
 
@@ -386,27 +377,54 @@
 <h4>Beschikbare capaciteit als Analog en AnalogValue </h3>
 
 	Net als het voedingsgebied, is de beschikbare capaciteit op het net een berekende waade. Immers, het is het verschil tussen 
-	de capaciteit van het net zoals het er nu gebouwd is, en de capaciteit in het net die nu al gebruikt wordt. 
+	de capaciteit van het net zoals het nu gebouwd is, en de capaciteit in het net die nu al gebruikt wordt. 
 	Hoe precies bepaald wordt 'wat de capaciteit is die nu al gebruikt wordt', is aan de netbeheerder. Dit kan De contractuele capaciteit betreffen, 
-	of (een statistische benadering van) de maximale last op een gevegeven moment op het net zit. Dit hangt af van het beleid van de netbeheerder.
+	of (een statistische benadering van) de maximale last op een gegeven moment op het net. Dit hangt af van het beleid van de netbeheerder.
 
 </section>	
+</section>
 
-	</section>
+</section>
+
+
+<section id="technischeUitgangspunten">
+	<h1>Technische Uitgangspunten</h1>
+
+	<p> Overzicht van de technische context waarin deze data gepubliceerd gaat worden</p>
+
+
+	<section id="bestandsformaat">
+		<h2>Bestandformaat</h2>
+		   <p>Shapefile of filegeodatabase.
+		   De drie beschreven informatieproducten bestaan uit vlakken, lijnen en/of punten. 
+		   Deze kunnen worden geleverd in één van de meest gebruikte standaard GIS formaten van 
+		   ESRI: Shape (.shp) of Filegeodatabase (.gdb). Dit bestandsformaat maakt het mogelijk dat 
+		   PDOK de verschillende datasets kan samenvoegen en controleren en vervolgens beschikbaar 
+		   kan stellen.
+		   In sommige bestanden is een geografische ligging op een kaart te tonen. 
+		   Hiervoor dient u het referentiesysteem “Amersfoort / RD New” te gebruiken,
+		   ook wel bekend onder de naam EPSG: 28992.</p>
+		</section>
+
 
 
 	
+		<section id="platform">
+			<h2>Platform</h2>
+			   <p>Het platform waarop de capaciteitsdata gepubliceerd zal worden is de Publieke Dienstverlening Op de Kaart (PDOK). Dit platform wordt beheerd door het Kadaster. </p>
+			</section>	
 
-  </section>
+</section>
+
   
 	<section class="appendix informative" id="glossary">
     <h2>Glossary</h2>
     <p><dfn data-lt="Beschikbare netcapaciteit">Beschikbare netcapaciteit</dfn>: De hoeveelheid 
-	energie dat het energienet op een bepaalde plek of in een bepaalde regio nog extra 
+	energie die het energienet op een bepaalde plek of in een bepaalde regio nog extra 
 	kan transporteren/distribueren bovenop wat momenteel typisch gebruikt wordt.</p>
 	
 	<p><dfn data-lt="Voedingsgebied">Voedingsgebied</dfn>: Het geografisch gebied dat door een 
-	 specifiek station van energie wordt voorzien, technisch gezien kan er overlap bestaan tussen 
+	 specifiek station van energie wordt voorzien. Technisch gezien kan er overlap bestaan tussen 
 	 de voedingsgebieden van een station</p>
 	 
 	<p><dfn data-lt="Station">Station</dfn>: Verzameling van schakel-en-verdeel installaties en 
